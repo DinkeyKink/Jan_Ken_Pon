@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAN KEN PON!</title>
+</head>
+<body>
+    <script>
+        function getComputerChoice() {
+           let computerChoice = Math.floor(Math.random() * 3);
+           if (computerChoice === 0) {
+            return "Guu";
+           }
+           else if (computerChoice === 1) {
+            return "Paa";
+           }
+           else {
+            return "Choki";
+           }
+        }
+
+        function getPlayerChoice() {
+            let playerSelection = prompt('Saisho wa guu, JAN KEN PON');
+            playerSelectionUpper = playerSelection.toUpperCase();
+            if (playerSelectionUpper === "GUU") {
+                return "Guu";
+            }
+            else if (playerSelectionUpper === "PAA") {
+                return "Paa";
+            }
+            else if (playerSelectionUpper === "CHOKI") {
+                return "Choki";
+            }
+            else {
+                getPlayerChoice();
+            }
+        }
+
+        let playerChoice = getPlayerChoice();
+        let computerChoice = getComputerChoice();
+
+        function playRound(computerChoice, playerChoice) {
+            if (computerChoice === "Guu" && playerChoice === "Paa") {
+                return "Yatta! Kachi da! Paa wa Guu no hou ga tsuyoi nee.";
+            }
+            else if (computerChoice === "Paa" && playerChoice === "Choki") {
+                return "Yatta! Kachi da! Choki wa Paa no hou ga tsuyoi nee.";
+            }
+            else if (computerChoice === "Choki" && playerChoice === "Guu") {
+                return "Yatta! Kachi da! Guu wa Choki no hou ga tsuyoi nee.";
+            }
+            else if (computerChoice === "Guu" && playerChoice === "Choki") {
+                return "Maketa! Zannen deshita...Guu wa Choki no hou ga tsuyoi nee.";
+            }
+            else if (computerChoice === "Choki" && playerChoice === "Paa") {
+                return "Maketa! Zannen deshita...Choki wa Paa no hou ga tsuyoi nee.";
+            }
+            else if (computerChoice === "Paa" && playerChoice === "Guu") {
+                return "Maketa! Zannen deshita...Paa wa Guu no hou ga tsuyoi nee."
+            }
+            else {
+                playRound(computerChoice, playerChoice)
+            }
+
+        }
+
+        function game() {
+            let win = 0
+            let lose = 0
+            for (let i = 0; i < 5; i++) {
+                getComputerChoice()
+                getPlayerChoice()
+                playRound(computerChoice, playerChoice)
+                if (playRound === "Yatta! Kachi da! Paa wa Guu no hou ga tsuyoi nee." || "Yatta! Kachi da! Choki wa Paa no hou ga tsuyoi nee." || "Yatta! Kachi da! Guu wa Choki no hou ga tsuyoi nee.") {
+                    win++
+                    console.log(win + " " + "kai katta!")
+                }
+                else {
+                    lose++
+                    console.log(lose + " " + "kai maketa!")
+                }
+            }
+
+        }
+    </script>
+</body>
+</html>
