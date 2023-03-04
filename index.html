@@ -8,6 +8,7 @@
 </head>
 <body>
     <script>
+        // function to get a random choice between rock, paper and scissors
         function getComputerChoice() {
            let computerChoice = Math.floor(Math.random() * 3);
            if (computerChoice === 0) {
@@ -20,7 +21,7 @@
             return "Choki";
            }
         }
-
+        // function to prompt user for a rock paper scissors choice, or ask again if not legit
         function getPlayerChoice() {
             let playerSelection = prompt('Saisho wa guu, JAN KEN PON');
             playerSelectionUpper = playerSelection.toUpperCase();
@@ -38,10 +39,10 @@
             }
         }
 
-        let playerChoice = getPlayerChoice();
-        let computerChoice = getComputerChoice();
-
-        function playRound(computerChoice, playerChoice) {
+        // Play a single round of jankenpon, returning a different option for each win, loss or draw
+        function playRound(getComputerChoice, GetplayerChoice) {
+            let playerChoice = getPlayerChoice();
+            let computerChoice = getComputerChoice();
             if (computerChoice === "Guu" && playerChoice === "Paa") {
                 return "Yatta! Kachi da! Paa wa Guu no hou ga tsuyoi nee.";
             }
@@ -61,21 +62,24 @@
                 return "Maketa! Zannen deshita...Paa wa Guu no hou ga tsuyoi nee."
             }
             else {
-                playRound(computerChoice, playerChoice)
+                return "Aiko deshou.";
             }
 
         }
-
+        //play an entire game of 5 rounds, keeping score of wins and losses
         function game() {
             let win = 0
             let lose = 0
             for (let i = 0; i < 5; i++) {
                 getComputerChoice()
                 getPlayerChoice()
-                playRound(computerChoice, playerChoice)
-                if (playRound === "Yatta! Kachi da! Paa wa Guu no hou ga tsuyoi nee." || "Yatta! Kachi da! Choki wa Paa no hou ga tsuyoi nee." || "Yatta! Kachi da! Guu wa Choki no hou ga tsuyoi nee.") {
+                playRound(getComputerChoice, getPlayerChoice)
+                if (playRound === "Yatta! Kachi da! Paa wa Guu no hou ga tsuyoi nee." || playRound === "Yatta! Kachi da! Choki wa Paa no hou ga tsuyoi nee." || playRound === "Yatta! Kachi da! Guu wa Choki no hou ga tsuyoi nee.") {
                     win++
                     console.log(win + " " + "kai katta!")
+                }
+                else if (playRound === "Aiko deshou.") {
+                    console.log("Aiko deshou!")
                 }
                 else {
                     lose++
